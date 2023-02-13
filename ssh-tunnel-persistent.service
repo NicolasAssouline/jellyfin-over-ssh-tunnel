@@ -1,0 +1,12 @@
+
+    [Unit]
+    Description=Persistent SSH Tunnel from TCP/8096 on this server to port TCP/8096 to jellyfin.YOURDOMAIN.COM (for encrypted traffic)
+    After=network.target
+
+    [Service]
+    Restart=on-failure
+    RestartSec=5
+    ExecStart=/usr/bin/ssh -p  -NTC -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R 127.0.0.1:8096:127.0.0.1:8096 nginx@jellyfin.YOURDOMAIN.COM
+
+    [Install]
+    WantedBy=multi-user.target

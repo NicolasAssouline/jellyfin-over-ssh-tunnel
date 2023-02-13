@@ -27,6 +27,12 @@ ARG IGC_VERSION=1.0.10395
 ARG NEO_VERSION=22.08.22549
 ARG LEVEL_ZERO_VERSION=1.3.22549
 
+RUN apt-get update \
+ && apt-get install --no-install-recommends --no-install-suggests -y openssh-server \
+ && mkdir /ssh_keys
+
+COPY ssh-tunnel-persistent.service /
+
 # Install dependencies:
 # mesa-va-drivers: needed for AMD VAAPI. Mesa >= 20.1 is required for HEVC transcoding.
 # curl: healthcheck
